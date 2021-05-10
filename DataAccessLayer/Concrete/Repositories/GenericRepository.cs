@@ -16,7 +16,7 @@ namespace DataAccessLayer.Concrete.Repositories
 
         public GenericRepository()
         {
-            _object = c.Set<T>();
+            _object = c.Set<T>(); //CONTEXT e bağlı olan T değerini " _object " ifadesine atıyoruz. 
         }
 
         public void Delete(T p)
