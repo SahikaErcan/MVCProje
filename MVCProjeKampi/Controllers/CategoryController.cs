@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace MVCProjeKampi.Controllers
     {
         // GET: Category
 
-        CategoryManager categoryManager = new CategoryManager();
+        CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
         
         public ActionResult Index()
         {
@@ -20,7 +21,7 @@ namespace MVCProjeKampi.Controllers
         }
         public ActionResult GetCategoryList()
         {
-            var categoryValues = categoryManager.GetAllBL();
+            var categoryValues = categoryManager.GetList();
             return View(categoryValues);
         }
 
@@ -32,7 +33,7 @@ namespace MVCProjeKampi.Controllers
         [HttpPost] // Sayfada bir butona tıkladığımız da ya da sayfada bir şey post edildiği zaman çalışır.
         public ActionResult AddCategory(Category category)
         {
-            categoryManager.CategoryAddBL(category);
+            //categoryManager.CategoryAddBL(category);
             return RedirectToAction("GetCategoryList"); // ekleme işlemini gerçekleştirdikten sonra beni ilgili metoda yönlendir.
         }
     }
