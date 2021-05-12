@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +36,27 @@ namespace MVCProjeKampi.Controllers
         public ActionResult AddCategory(Category category)
         {
             //categoryManager.CategoryAddBL(category);
-            return RedirectToAction("GetCategoryList"); // ekleme işlemini gerçekleştirdikten sonra beni ilgili metoda yönlendir.
+            CategoryValidator categoryValidatior = new CategoryValidator();
+            ValidationResult validationResult = categoryValidatior.Validate(category);
+            // categoryValidatior da olan değerlere göre parametreden gelen değerin doğruluk kontrolünü gerçekleştir.
+            // .Validate : geçerliliğini kontrol etme
+
+            if (validationResult.IsValid)  // Sonuc validasyona uygunsa yani geçerliyse
+            { // Ekleme işleminin gerçekleşmesi için validationResult un doğrulanmış olması gerekiyor.
+             // Kategory adı boş olmayacak, en az 3 karakter olacak, Açıklama boş olmayacak gibi...
+                categoryManager.CategoryAdd(category);
+                return View("GetCategoryList"); // GetCategoryList Aksiyonuna yönlendirmesini istiyoruz.
+            }
+            else
+            { // Hata mesajlarını tutacağımız bir dizi oluşturuyoruz.
+                foreach (var item in validationResult.Errors)  // validationResult dan gelen erorları kullanarak
+                {
+                    ModelState.AddModelError(item.PropertyName,item.ErrorMessage);
+              //Modelin Durumuna hataları ekle, bu hatalar özelliğin adı ve hata mesajı şeklinde kaydedilir.
+                }
+            }
+
+            return View(); 
         }
     }
 }
