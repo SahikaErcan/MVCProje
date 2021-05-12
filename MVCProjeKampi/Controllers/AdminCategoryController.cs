@@ -43,5 +43,11 @@ namespace MVCProjeKampi.Controllers
             }
             return View();
         }
+        public ActionResult DeleteCategory(int id) // index üzerinde çağrılarak kullanılacak. Kendine ait bir view i olmayacak.
+        {
+            var categoryValue = categoryManager.GetByID(id);
+            categoryManager.CategoryDelete(categoryValue);
+            return RedirectToAction("Index");
+        }
     }
 }

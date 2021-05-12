@@ -25,6 +25,13 @@ namespace DataAccessLayer.Concrete.Repositories
             c.SaveChanges();
         }
 
+        public T Get(Expression<Func<T, bool>> filter)
+        {
+        /* SingleOrDefault : Bir dizide veya listede sadece bir tane değer
+         * göndermek için kullanılan EntityFramework Linq metodudur. */
+            return _object.SingleOrDefault(filter);
+        }
+
         public void Insert(T p)
         {
             _object.Add(p);
