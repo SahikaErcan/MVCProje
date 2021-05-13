@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<div class="ml-4">
+    <div class="bg-gradient-lightblue p-2 mr-2" style="width:220px; text-align:center; border-radius:4px; display:inline-block;">
+
+        <h3 class="pt-4">@ViewBag.sumCategory</h3>
+
+        <p>Toplam Kategori Sayısı</p>
+        
+    </div>
+
+    <div class="bg-gradient-success p-2 mr-2" style="width:220px; text-align:center; border-radius:4px; display:inline-block;">
+
+        <h3>@ViewBag.softwareTitle</h3>
+
+        <p>"Yazılım" kategorisine ait başlık sayısı</p>
+
+    </div>
+
+    <div class="bg-gradient-warning p-2 mr-2" style="width:220px; text-align:center; border-radius:4px; display:inline-block;">
+
+        <h3>@ViewBag.writerNameLetterA</h3>
+
+        <p>Adında "a" harfi geçen yazar sayısı</p>
+
+    </div>
+
+    <div class="bg-gradient-danger p-2 mr-2" style="width:220px; text-align:center; border-radius:4px; display:inline-block;">
+
+        <h3>@ViewBag.categoryNameMore</h3>
+
+        <p>En fazla başlığa sahip kategori adı</p>
+
+    </div>
+    <div class="bg-cyan p-2 mr-2" style="width:220px; text-align:center; border-radius:4px; display:inline-block;">
+
+        <h3>@ViewBag.activeCategory</h3>
+
+        <p>Kategori "True" - Kategori "False"</p>
+
+    </div>
+</div>
